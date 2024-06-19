@@ -12,4 +12,9 @@ public class Entry
         Console.WriteLine($"RESPONSE: {_entryText}");
         Console.WriteLine("");
     }
+
+    public string WriteToFile()
+    {
+        return $"{_date}|{_time}|{_promptText}|{_entryText}";
+    }
 }
