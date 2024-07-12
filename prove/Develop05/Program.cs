@@ -4,6 +4,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop05 World!");
+        GoalManager manager = new GoalManager();
+
+        //Clear the console for the program to start
+        Console.Clear();
+        manager.Start();
+        
     }
 }

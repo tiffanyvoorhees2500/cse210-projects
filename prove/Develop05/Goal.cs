@@ -1,8 +1,8 @@
 public abstract class Goal
 {
-    private string _name;
-    private string _shortDescription;
-    private int _points;
+    protected string _name;
+    protected string _shortDescription;
+    protected int _points;
 
     public Goal(string name, string shortDescription, int points)
     {
@@ -11,11 +11,26 @@ public abstract class Goal
         _points = points;
     }
 
+    public string GetName()
+    {
+        return _name;
+    }
+
+    public int GetPoints()
+    {
+        return _points;
+    }
+
+    public virtual int GetBonus()
+    {
+        return 0;
+    }
+
     public abstract void RecordEvent();
     public abstract bool IsCompleted();
-    public string GetGoalDetails()
+    public virtual string GetGoalDetails()
     {
-        return "";
+        return $"{_name} ({_shortDescription})";
     }
     public abstract string GetStringRepresentation();
 }
