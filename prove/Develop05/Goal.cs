@@ -28,6 +28,7 @@ public abstract class Goal
 
     public abstract void RecordEvent();
     public abstract bool IsCompleted();
+    public abstract void ResetGoal();
     public virtual string GetGoalDetails()
     {
         return $"{_name} ({_shortDescription})";

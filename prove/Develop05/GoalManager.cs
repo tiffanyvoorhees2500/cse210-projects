@@ -63,21 +63,8 @@ public class GoalManager
 
     public void DisplayPlayerInfo()
     {
-        string levelString;
-        if (_score >= 100 && _score < 1000)
-        {
-            levelString = $"{_score.ToString()[0]}";
-        }
-        else if (_score >= 1000)
-        {
-            levelString = "10. Congratulations you have reached the highest level possible!";
-        }
-        else
-        {
-            levelString = "1";
-        }
-
-        Console.WriteLine($"You have {_score} points and you are Level {levelString}.");
+        int level = _score / 100;
+        Console.WriteLine($"You have {_score} points and you are Level {level}.");
     }
 
     public void ListGoalNames()
@@ -176,18 +163,41 @@ public class GoalManager
         int goalSelection = int.Parse(Console.ReadLine());
 
         Goal goal = _goals[goalSelection - 1];
-        goal.RecordEvent();
-        int pointsEarned = 0;
-        pointsEarned += goal.GetPoints();
-        if (goal.IsCompleted() == true)
+        string resetGoal = "N";
+
+        if(goal.IsCompleted())
         {
-            pointsEarned += goal.GetBonus();
+            Console.Write("You have already completed that goal, would you like to reset it? Y/N: ");
+            resetGoal = Console.ReadLine();
+
+            if(resetGoal.Equals("Y", StringComparison.CurrentCultureIgnoreCase))
+            {
+                goal.ResetGoal();
+            }
         }
 
-        _score += pointsEarned;
-
-        Console.Clear();
-        Console.WriteLine($"Congratulations! You have earned {pointsEarned} points!");
+        if(!goal.IsCompleted())
+        {
+            goal.RecordEvent();
+            int pointsEarned = 0;
+            pointsEarned += goal.GetPoints();
+            if (goal.IsCompleted() == true)
+            {
+                pointsEarned += goal.GetBonus();
+            }
+            
+            Console.WriteLine($"Congratulations! You earned {pointsEarned} points!");
+            
+            Console.Clear();
+            //Calculate if we have enough points to Level up
+            if((_score + pointsEarned) / 100 > _score / 100)
+            {
+                Console.WriteLine("********************");
+                Console.WriteLine("You leveled up!");
+                Console.WriteLine("********************");
+            }
+            _score += pointsEarned;
+        }
     }
 
     public void SaveGoals()

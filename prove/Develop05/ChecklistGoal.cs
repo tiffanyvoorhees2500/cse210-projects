@@ -28,7 +28,7 @@ public class ChecklistGoal : Goal
     }
     public override bool IsCompleted()
     {
-        if(_timesComplete == _targetTimes)
+        if(_timesComplete >= _targetTimes)
         {
             return true;
         }
@@ -46,5 +46,10 @@ public class ChecklistGoal : Goal
     public override string GetStringRepresentation()
     {
         return $"ChecklistGoal|{_name}|{_shortDescription}|{_points}|{_timesComplete}|{_targetTimes}|{_bonus}";
+    }
+
+    public override void ResetGoal()
+    {
+        _timesComplete = 0;
     }
 }

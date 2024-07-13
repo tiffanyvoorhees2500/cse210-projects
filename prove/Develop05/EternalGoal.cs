@@ -18,4 +18,9 @@ public class EternalGoal : Goal
     {
         return $"EternalGoal|{_name}|{_shortDescription}|{_points}";
     }
+
+    public override void ResetGoal()
+    {
+        
+    }
 }

@@ -24,4 +24,9 @@ public class SimpleGoal : Goal
     {
         return $"SimpleGoal|{_name}|{_shortDescription}|{_points}|{_isComplete}";
     }
+
+    public override void ResetGoal()
+    {
+        _isComplete = false;
+    }
 }
